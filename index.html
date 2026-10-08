@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ordenar Arrays de Cadenas</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        .contenedor {
+            box-sizing: border-box;
+            width: 700px;
+            max-width: 700px;
+            margin: 0 auto;
+            text-align: left;
+        }
+        #titulo,
+        #titulo2 {
+            color: #212529;
+            font-size: 20px;
+            font-weight: 600;
+        }
+        #titulo2 {
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 10px;
+        }
+        #enunciado{
+            border-top: 1px solid #ddd;
+            padding-top: 10px;
+            color: #888;
+            font-size: 16px;
+            white-space: nowrap;
+        }
+        .nombre {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 8px;
+            color: grey;
+        }
+        button {
+            padding: 4px 6px;
+            border: 1px solid #0d6efd;
+            border-radius: 4px;
+            background-color: #0d6efd;
+            color: #fff;
+            font-family: inherit;
+            font-size: 14px;
+            line-height: 1.5;
+            cursor: pointer;
+        }
+        .nombres {
+            display: flex;
+            align-items: flex-start;
+            justify-content: flex-start;
+            gap: 8px;
+        }
+        #nombres {
+            box-sizing: border-box;
+            width: 375px;
+            max-width: 375px;
+            height: 165px;
+            border: 1px solid #b8b8b8;
+            border-radius: 5px;
+        }
+        #nombres::placeholder {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 16px;
+            font-weight: normal;
+            color: #888;
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <main class="contenedor">
+    <h1 id="titulo">Ordenar Arrays de Cadenas</h1>
+    <p id="enunciado">Ingrese nombres en la caja de texto de abajo y ordene este listado</p>
+    <div class="nombre">
+        <label for="nombre">Nombre: </label>
+        <input id="nombre" type="text">
+        <button id="agregar" type="button" onclick="agregarNombre()">Agregar y ordenar nombre</button>
+    </div>
+
+    <h1 id="titulo2">Nombres ordenados</h1>
+    <div class="nombres">
+        <textarea id="nombres" placeholder="Aqui apareceran los nombres ordenados" readonly></textarea>
+        <button id="limpiar" type="button" onclick="limpiarNombres()">Limpiar</button>
+    </div>
+    </main>
+    <script>
+        var nombres = [];
+
+        function agregarNombre() {
+            var campoNombre = document.getElementById("nombre");
+            var nombre = campoNombre.value.trim();
+
+            if (nombre !== "") {
+                nombres.push(nombre);
+                nombres.sort(function (nombreA, nombreB) {
+                    return nombreA.localeCompare(nombreB, "es", { sensitivity: "base" });
+                });
+
+                document.getElementById("nombres").value = nombres.join("\n");
+                campoNombre.value = "";
+                campoNombre.focus();
+            }
+        }
+
+        function limpiarNombres() {
+            nombres = [];
+            document.getElementById("nombres").value = "";
+        }
+    </script>
+</body>
+</html>
